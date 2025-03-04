@@ -7,12 +7,12 @@ import java.util.Properties;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-       // forBook();
-        //forPatron();
-        //getBooksMatchingTitle();
-        //getBooksPublishedBeforeYear();
+        forBook();
+        forPatron();
+        getBooksMatchingTitle();
+        getBooksPublishedBeforeYear();
         getPatronsYoungerThanDate();
-        //getPatronsLivingAtZip();
+        getPatronsLivingAtZip();
 
     }
 
