@@ -82,15 +82,22 @@ public class JDBCBroker
 	protected JDBCBroker()
     	{
     		// DEBUG: System.out.println("JDBCBroker.JDBCBroker()");
-		props = new PropertyFile("CSC-429-Project/Basic Project Repository/dbConfig.ini");
+		props = new PropertyFile("Basic Project Repository/dbConfig.ini");
 		if (props != null)
 		{
 			dbName = props.getProperty("dbName");
 			username = props.getProperty("username");
 			password = props.getProperty("password");
 			server = props.getProperty("server");
-			if (server == null)
+
+			System.out.println("Database Name: " + dbName);
+			System.out.println("Database Username: " + username);
+			System.out.println("Database Password: " + password);
+
+			if (server == null) {
+				System.out.println("Database Server Not Found");
 				server = "localhost";
+			}
 			dbClassNameVal = props.getProperty("dbClassName");
 			if (dbClassNameVal == null)
 				dbClassNameVal = "org.mariadb.jdbc.Driver";
@@ -101,22 +108,22 @@ public class JDBCBroker
 		}
 		String driverClassName = dbClassNameVal;
 		try
-		{	
-			// load and register the JDBC driver classes
-			theDriver = (Driver) Class.forName(driverClassName).newInstance();
-		} 
-			catch(ClassNotFoundException exc)
-		{
-			System.err.println("JDBCBroker.JDBCBroker - Could not load driver class: ClassNotFoundException");
-			new Event(Event.getLeafLevelClassName(this), "JDBCBroker", "Could not load driver class[" + driverClassName + "]", Event.ERROR);
-		}	
-			catch(InstantiationException exc)
-		{
-			System.err.println("JDBCBroker.JDBCBroker - Could not load driver class: InstantiationException");
-			new Event(Event.getLeafLevelClassName(this), "JDBCBroker", "Could not load driver class[" + driverClassName + "]", Event.ERROR);
-		}
-			catch(IllegalAccessException exc)
-		{
+			{
+				// load and register the JDBC driver classes
+				theDriver = (Driver) Class.forName(driverClassName).newInstance();
+			}
+				catch(ClassNotFoundException exc)
+			{
+				System.err.println("JDBCBroker.JDBCBroker - Could not load driver class: ClassNotFoundException");
+				new Event(Event.getLeafLevelClassName(this), "JDBCBroker", "Could not load driver class[" + driverClassName + "]", Event.ERROR);
+			}
+				catch(InstantiationException exc)
+			{
+				System.err.println("JDBCBroker.JDBCBroker - Could not load driver class: InstantiationException");
+				new Event(Event.getLeafLevelClassName(this), "JDBCBroker", "Could not load driver class[" + driverClassName + "]", Event.ERROR);
+			}
+				catch(IllegalAccessException exc)
+			{
 			System.err.println("JDBCBroker.JDBCBroker - Could not load driver class: IllegalAccessException");
 			new Event(Event.getLeafLevelClassName(this), "JDBCBroker", "Could not load driver class[" + driverClassName + "]", Event.ERROR);			
     		}

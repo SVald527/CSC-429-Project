@@ -68,8 +68,8 @@ public class Patron extends EntityBase implements IView {
     }
 
     public static int compare(Patron a, Patron b) {
-        String aNum = (String)a.getState("patronID");
-        String bNum = (String)b.getState("patronID");
+        String aNum = (String)a.getState("patronId");
+        String bNum = (String)b.getState("patronId");
         return aNum.compareTo(bNum);
     }
 
